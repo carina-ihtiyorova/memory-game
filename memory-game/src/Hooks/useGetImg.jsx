@@ -1,27 +1,12 @@
-import axios from "axios"
+export default function useGetImg() {
+  const accessKey = "7hERQb6YQPFqdB_aCRxs0i-6DtG5iJNrUmt1M2J5oK0";
 
-export default useGetImg = async ()=>{
-    const options = {
-        method: 'GET',
-        url: 'https://ronreiter-meme-generator.p.rapidapi.com/meme',
-        params: {
-          top: 'Top Text',
-          bottom: 'Bottom Text',
-          meme: 'Condescending-Wonka',
-          font_size: '50',
-          font: 'Impact'
-        },
-        headers: {
-          'X-RapidAPI-Key': 'SIGN-UP-FOR-KEY',
-          'X-RapidAPI-Host': 'ronreiter-meme-generator.p.rapidapi.com'
-        }
-      };
-
-
-    try {
-        const response = await axios.request(options);
-        console.log(response.data);
-    } catch (error) {
-        console.error(error);
-    }
+  fetch(`https://api.unsplash.com/photos/?client_id=${accessKey}`)
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      console.error("Error fetching data from Unsplash:", error);
+    });
 }
